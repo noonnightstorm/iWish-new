@@ -1,0 +1,14 @@
+.create-logo{
+	margin: 10px 20px;
+}
+.title{
+	padding: 15px 0;
+	font-size: 30px;
+	text-indent: 1em;
+	color: #888;
+}
+#project-form{
+	width: 700px;
+	border-top: 5px dotted #EC6941;
+	margin: 0 0 20px 50px;
+}

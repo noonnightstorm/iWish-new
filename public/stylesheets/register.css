@@ -1,0 +1,92 @@
+/* 与index.css一样的css */
+.title{
+	padding: 40px 150px 0 70px;
+	font-size: 30px;
+	text-indent: 1em;
+	color: #888;
+}
+.login-form{
+	width: 700px;
+	border-top: 5px dotted #EC6941;
+	margin: 30px auto 20px 50px;
+}
+.login-account{
+	margin-top: 30px;
+}
+.register{
+	display: inline-block;
+	margin-left: 40px;
+	color: #EC6941;
+	text-decoration: underline;
+}
+/* register独有的css */
+.base-info{
+	float: left;
+	width: 330px;
+}
+.register-avater{
+	display: block;
+	width: 250px;
+	font-size: 25px;
+	color: #EC6941;
+}
+.avatar-box{
+	width: 384px;
+	height: 475px;
+	margin-left: 340px;
+}
+.avatar-title{
+	margin-left: 32px;
+	font-size: 25px;
+	color: #EC6941;
+}
+.avatar-row{
+	width: 384px;
+	height: 150px;
+	float: none;
+}
+.avatar-item{
+	float: left;
+}
+.avatar-name{
+	text-align: center;
+	color: #EC6941;
+}
+.avatar-select{
+	width: 258px;
+	margin: 22px 0 0 40px;
+	padding: 5px 5px 5px 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 1px 1px 3px #292929;
+	-moz-box-shadow: 1px 1px 3px #292929;
+	box-shadow: 1px 1px 3px #292929;
+}
+.avatar{
+	width: 128px;
+	height: 128px;
+	background-image:url(../images/avatar.png); 
+}
+#avatar-chensy{
+	background-position: 0px 0px;
+}
+#avatar-eric{
+	background-position: 0px -138px;
+}
+#avatar-haozi{
+	background-position: 0px -276px;
+}
+#avatar-jation{
+	background-position: 0px -414px;
+}
+#avatar-michael{
+	background-position: 0px -552px;
+}
+#avatar-shunai{
+	background-position: 0px -690px;
+}
+#avatar-steven{
+	background-position: 0px -828px;
+}
+#avatar-storm{
+	background-position: 0px -966px;
+}

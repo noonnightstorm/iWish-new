@@ -1,0 +1,31 @@
+.list-title{
+	color: #EC6941;
+	font-size: 30px;
+}
+.article-item{
+	padding: 20px;
+	width: 860px;
+	border-bottom: 1px #EC6941 dotted;
+}
+.article-item:hover{
+	background: #EEE;
+}
+.article-title{
+	font-size: 20px;
+}
+.article-title a{
+	padding: 3px;
+	color: #EC6941;
+}
+.article-title a:hover{
+	color: #FFF;
+	background-color: #EC6941;
+}
+.article-content{
+	font-size: 14px;
+	text-indent: 2em;
+	color: #EC6941;
+}
+.footer-box .pro-list-menu{
+	width: 300px;
+}

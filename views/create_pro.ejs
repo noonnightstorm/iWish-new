@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>创建项目</title>
+	<link rel="stylesheet" href="/stylesheets/layout.css">
+	<link rel="stylesheet" href="/stylesheets/create_pro.css">
+	<script type="text/javascript" src="/javascripts/jquery-1.7.min.js"></script>
+	<script type="text/javascript" src="/javascripts/vertify.js"></script>
+	<script  type="text/javascript" src="/javascripts/create_pro.js"></script>
+</head>
+<body>
+	<div class="container">
+		<header class="header">
+			<a href="" class="logo"></a>
+			<a href="http://www.scauhci.org" class="header-orange logo-tips">for HCI</a>
+			<img src="/images/create-logo.png" alt="创建项目标记" class="create-logo">
+		</header>
+		<div class="body">
+			<p class="title">如果你想创建像这样的列表，填写下表创建自己的~
+			</p>
+			<form action="/create_pro/<%=mail%>/<%=name%>/<%=user_id%>" method="post" id="project-form">
+				<input type="text" class="login-input" placeholder="项目名称" name="name" id="name">
+				<textarea name="content" id="introduction" cols="30" rows="10" class="login-input" placeholder="项目简介"></textarea>
+				<input name="password" type="password" class="login-input" placeholder="管理密码" id="password">
+				<input type="password" class="login-input" placeholder="密码确认" id="password-again">
+				<input type="submit" value="创建" class="btn login-btn">
+				<input type="reset" value="重置" class="btn login-btn">
+			</form>
+		</div>
+		<footer>
+			<div class="footer-box">
+				<section class="menu">
+					<a href="">愿望树</a>
+					&nbsp&nbsp|&nbsp&nbsp
+					<a href="">创建项目</a>
+				</section>
+			</div>
+			<div class="footer-author">
+				<span>技术指导:梁广彬 黄浩松 黄佳生</span>
+				&nbsp&nbsp&nbsp&nbsp
+				<span>版权所有:<a href="http://www.scauhci.org">SCAU@HCI</a></span>
+			</div>
+		</footer>
+	</div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>账户注册</title>
+	<link rel="stylesheet" href="/stylesheets/layout.css">
+	<link rel="stylesheet" href="/stylesheets/index.css">
+	<link rel="stylesheet" href="/stylesheets/register.css">
+	<script type="text/javascript" src="/javascripts/jquery-1.7.min.js"></script>
+	<script type="text/javascript" src="/javascripts/vertify.js"></script>
+	<script type="text/javascript" src="/javascripts/index.js"></script>
+</head>
+<body>
+	<div class="container">
+		<header class="header">
+			<a href="" class="logo"></a>
+			<a href="http://scauhci.org" class="header-orange logo-tips">for HCI</a>
+		</header>
+		<div class="body">
+			<p class="title">注册</p>
+			<form action="/pro_list/<mail>/<name>" method="get" class="login-form" id="register-form">
+				<div class="base-info">
+					<input type="text" class="login-input login-account" id="register-account" placeholder="邮箱" name="mail">
+					<input type="password" class="login-input login-password" id="register-psw" placeholder="密码" name="psw">
+					<input type="password" class="login-input login-password" id="register-psw-again" placeholder="密码确认">
+					<input type="text" class="login-input login-nickname" id="register-nickname" placeholder="昵称" name="name">
+					<div class="avatar-select">
+						<select name="avatar" id="register-avatar" class="register-avater">
+							<option value="default">头像</option>
+							<option value="chensy">Chensy</option>
+							<option value="eric">Eric</option>
+							<option value="haozi">HaoZi</option>
+							<option value="jation">Jation</option>
+							<option value="michael">Michael</option>
+							<option value="shunai">Shunai</option>
+							<option value="steven">Steven</option>
+							<option value="storm">Storm</option>
+						</select>
+					</div>
+					<input type="submit" value="注册" class="btn login-btn">
+					<a href="/" class="register">登录</a>
+				</div>
+				<div class="avatar-box">
+					<h1 class="avatar-title"><strong>头像选择：</strong></h1>
+					<div class="avatar-row">
+						<div class="avatar-item">
+							<!-- <img src="../image/Avatar-Chensy.png" alt="#" class="avatar"> -->
+							<div class="avatar" id="avatar-chensy"></div>
+							<p class="avatar-name">Chensy</p>
+						</div>
+						<div class="avatar-item">
+							<!-- <img src="../image/Avatar-Eric.png" alt="#" class="avatar"> -->
+							<div class="avatar" id="avatar-eric"></div>
+							<p class="avatar-name">Eric</p>
+						</div>
+						<div class="avatar-item">
+							<!-- <img src="../image/Avatar-HaoZi.png" alt="#" class="avatar"> -->
+							<div class="avatar" id="avatar-haozi"></div>
+							<p class="avatar-name">HaoZi</p>
+						</div>
+					</div>
+					<div class="avatar-row">
+						<div class="avatar-item">
+							<!-- <img src="../image/Avatar-Jation.png" alt="#" class="avatar"> -->
+							<div class="avatar" id="avatar-jation"></div>
+							<p class="avatar-name">Jation</p>
+						</div>
+						<div class="avatar-item">
+							<!-- <img src="../image/Avatar-Michael.png" alt="#" class="avatar"> -->
+							<div class="avatar" id="avatar-michael"></div>
+							<p class="avatar-name">Michael</p>
+						</div>
+						<div class="avatar-item">
+							<!-- <img src="../image/Avatar-Shunai.png" alt="#" class="avatar"> -->
+							<div class="avatar" id="avatar-shunai"></div>
+							<p class="avatar-name">Shunai</p>
+						</div>
+					</div>
+					<div class="avatar-row">
+						<div class="avatar-item">
+							<!-- <img src="../image/Avatar-Steven.png" alt="#" class="avatar"> -->
+							<div class="avatar" id="avatar-steven"></div>
+							<p class="avatar-name">Steven</p>
+						</div>
+						<div class="avatar-item">
+							<!-- <img src="../image/Avatar-Storm.png" alt="#" class="avatar"> -->
+							<div class="avatar" id="avatar-storm"></div>
+							<p class="avatar-name">Storm</p>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<footer>
+			<div class="footer-box">
+				<section class="menu">
+					<a href="">愿望树</a>
+					&nbsp&nbsp|&nbsp&nbsp
+					<a href="">创建项目</a>
+				</section>
+			</div>
+			<div class="footer-author">
+				<span>技术指导:梁广彬 黄浩松 黄佳生</span>
+				&nbsp&nbsp&nbsp&nbsp
+				<span>版权所有:<a href="">SCAU@HCI</a></span>
+			</div>
+		</footer>
+	</div>
+</body>
+</html>

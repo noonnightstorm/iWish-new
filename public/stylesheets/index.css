@@ -1,0 +1,20 @@
+.title{
+	padding: 40px 150px 0 70px;
+	font-size: 30px;
+	text-indent: 1em;
+	color: #888;
+}
+.login-form{
+	width: 700px;
+	border-top: 5px dotted #EC6941;
+	margin: 30px auto 20px 50px;
+}
+.login-account{
+	margin-top: 30px;
+}
+.register{
+	display: inline-block;
+	margin-left: 40px;
+	color: #EC6941;
+	text-decoration: underline;
+}

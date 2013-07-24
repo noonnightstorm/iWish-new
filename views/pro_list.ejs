@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>愿望树列表</title>
+	<link rel="stylesheet" href="/stylesheets/layout.css">
+	<link rel="stylesheet" href="/stylesheets/pro_list.css">
+	<script type="text/javascript" src="/javascripts/jquery-1.7.min.js"></script>
+	<script type="text/javascript" src="/javascripts/template.js"></script>
+	<script type="text/javascript" src="/javascripts/pro_list.js"></script>
+</head>
+<body>
+	<div class="container">
+		<header class="header">
+			<a href="" class="logo"></a>
+			<a href="http://www.scauhci.org" class="header-orange logo-tips">for HCI</a>
+			<span class="header-orange header-name">Hello ,<%= name %> !</span>
+			<button class="header-orange sign-out">sign out</button>
+		</header>
+		<div class="body">
+			<h1 class="list-title">项目列表</h1>
+			<section class="article-box" id="article-box">
+			</section>
+		</div>
+		<footer>
+			<div class="footer-box">
+				<section class="menu pro-list-menu">
+					<a href="">愿望树</a>
+					&nbsp&nbsp|&nbsp&nbsp
+					<a href="/create_pro_page/<%=mail%>/<%=name%>/<%=user_id%>">创建项目</a>
+					&nbsp&nbsp|&nbsp&nbsp
+					<a href="">我的项目</a>
+				</section>
+			</div>
+			<div class="footer-author">
+				<span>技术指导:梁广彬 黄浩松 黄佳生</span>
+				&nbsp&nbsp&nbsp&nbsp
+				<span>版权所有:<a href="http://www.scauhci.org">SCAU@HCI</a></span>
+			</div>
+		</footer>
+	</div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+*{
+	margin: 0;
+	padding: 0;
+	border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+}
+body{
+	font-family: "微软雅黑",Arial,sans-serif;
+	font-size: 15px;
+}
+a{
+	text-decoration: none;
+}
+.container{
+	width:860px;
+	margin: 20px auto;
+	position: relative;
+}
+.header{
+	width: 860px;
+}
+.logo{
+	display: block;
+	width: 437px;
+	height: 117px;
+	text-indent: -999em;
+	background: url('../images/logo.png') no-repeat;
+}
+.header-orange{
+	position: absolute;
+	font-size: 14px;
+	padding: 2px;
+	color: #EC6941;
+}
+.header-orange:hover{
+	background:#ec6941;
+	color:#ffffff;
+}
+.logo-tips{
+	left: 400px;
+	top: 20px;
+}
+.header-name{
+	top: 0;
+	right: 100px;
+}
+.sign-out{
+	background-color: transparent;
+	top: 0;
+	right: 40px;
+}
+.body{
+	width: 860px;
+	margin-bottom: 20px;
+}
+.footer-box{
+	position: relative;
+	width: 100%;
+	height: auto!important;
+	min-height: 150px;
+	height: 150px;
+	background: #EC6941;
+	color: #FFF;
+}
+.footer-box .menu{
+	width: 195px;
+	height: 30px;
+	margin: auto;
+	padding-top: 50px;
+}
+.footer-box .menu a{
+	font-size: 20px;
+	color: #FFF;
+}
+.footer-box .menu a:hover{
+	text-decoration: underline;
+}
+.footer-author{
+	width: 100%;
+	text-align: center;
+	color: #EC6941;
+}
+.footer-author a{
+	color: #ff3600;
+	text-decoration: underline;
+}
+.btn{
+	display: inline-block;
+	font-size: 20px;
+	color: #EC6941;
+	background: white;
+	-webkit-box-shadow: inset -1px -1px 3px #292929;
+	-moz-box-shadow: inset -1px -1px 3px #292929;
+	box-shadow: inset -1px -1px 3px #292929;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.login-input{
+	display: block;
+	margin: 22px 0 0 40px;
+	padding: 5px 5px 5px 15px;
+	width: 250px;
+	font-size: 25px;
+	color: #EC6941;
+	-webkit-box-shadow: 1px 1px 3px #292929;
+	-moz-box-shadow: 1px 1px 3px #292929;
+	box-shadow: 1px 1px 3px #292929;
+	-webkit-transition: -webkit-box-shadow 0.2s ease-in-out;
+	-moz-transition: -moz-box-shadow 0.2s ease-in-out;
+	-o-transition: -o-box-shadow 0.2s ease-in-out;
+	transition: box-shadow 0.2s ease-in-out;
+}
+.login-input:hover{
+	background:#fff7f5;
+}
+.login-input:active{
+	background:#eee;
+}
+.login-btn{
+	margin :20px auto auto 40px ;
+	height: 39px;
+	width: 75px;
+	padding: 5px 10px 5px 10px;
+}
+.login-btn:hover{
+	border:1px solid #ffffff;
+	background:#ec6941;
+	color:#FFFFFF;
+}
