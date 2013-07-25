@@ -54,14 +54,15 @@ function projectVertify(){
 	}
 	return true;
 }
-/*
-function commentVertify(){
+
+function wishVertify(){
 	var $wish_content = $("#wish-form-content");
 	if(!vertify($wish_content,0,"#FFF7F4","#ffb9b9")){
 		return false;
 	}
 	return true;
 }
+/*
 function projectEnterVertify(){
 	var $wish_menu_input = $("#wish-menu-input");
 	if(!vertify($wish_menu_input,0,"#FFF7F4","#ffb9b9")){

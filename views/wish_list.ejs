@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="/stylesheets/layout.css">
 	<link rel="stylesheet" href="/stylesheets/wish_list.css">
 	<script type="text/javascript" src="/javascripts/jquery-1.7.min.js"></script>
+	<script type="text/javascript" src="/javascripts/vertify.js"></script>
 	<script type="text/javascript" src="/javascripts/wish_list.js"></script>
 </head>
 <body>
@@ -154,9 +155,9 @@
 	</div>
 	<form action="" class="wish-form" id="wish-form">
 			<h1 class="wish-form-title">我的愿望：</h1>
-			<textarea name="" id="" class="wish-form-content" placeholder="愿望一定会成真的" maxlength="250"></textarea>
+			<textarea id="wish-form-content" class="wish-form-content" placeholder="愿望一定会成真的" maxlength="250"></textarea>
 			<div class="wish-form-btn-row">
-				<button class="wish-form-btn" type="submit">提交</button>
+				<button class="wish-form-btn" id="wish-form-btn" type="submit">提交</button>
 				<button class="wish-form-btn" type="reset">重写</button>
 			</div>
 	</form>

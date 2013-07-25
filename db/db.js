@@ -106,7 +106,20 @@ exports.insertProject = function(info,cb){
 	project.save();
 	cb(project);
 };
-exports.selectMyProject = function(info,err_cb,cb){
+exports.selectWishList = function(info,cb,err_cb){
+	Wishs.find({project_id:info.project_id},numm,{skip:info.index,limit:num}).sort({_id:-1}).exec(function(err,wishs){
+		if(err){
+			err_cb(err);
+		}
+		if(wishs){
+			cb(wishs);
+		}
+	});
+};
+exports.insertWish = function(info,cb){
+	
+};
+/*exports.selectMyProject = function(info,err_cb,cb){
 	Projects.find({user_id:info.user_id},function(err,projects){
 		if(err){
 			err_cb();
@@ -141,4 +154,4 @@ exports.insertWish = function(info,err_cb,cb){
 };
 exports.updataWishStatus = function(info,err_cb,cb){
 	
-};
+};*/

@@ -68,6 +68,34 @@ exports.c_create_pro = function(req, res){
 	db.insertProject(info,cb);
 };
 
+//获取愿望树的数据
+exports.c_wish_list_data = function(req, res){
+	var info = {
+		mail : req.cookies.mail,
+		name : req.cookies.name,
+		user_id : req.cookies.user_id,
+		project_id : req.params.project_id,
+		index : req.params.index,
+		num : req.params.num
+	},
+	cb = function(data){
+		write_back(res,data);
+	},
+	err_cb = function(err_info){
+		write_back(res,err_info);
+	};
+	db.selectWishList(info,cb,err_cb);
+};
+
+//创建愿望
+exports.c_create_wish = function(req, res){
+	var info = {
+		mail : req.cookies.mail,
+		name : req.cookies.name,
+		user_id : req.cookies.user_id
+	};
+};
+
 function write_back(res,data){
 	if(typeof(data) == "object"){
 		res.writeHead(200, {"content-type" : "text/json"});
