@@ -21,28 +21,41 @@ var InitPage = {
 		sendAjax("/init_project/" + project_id,"get",null,"json",cb);
 	},
 	initWish : function(){
-		
+		var project_id = $("#project-body").attr("pro_id");
+		var cb = function(data){
+			for(var i = 0;i < data.length;i++){
+				var item = $(Template.wish_list_item);
+			}
+		};
+		//初始化ongoing的愿望
+		sendAjax("/wish_list_data/"+project_id+"/null/null/ongoing","get",null,"json",cb);
+		//初始化iwish的愿望
 	}
 };
 
 var WishListener = {
+	//弹出提交单
 	listener : function(){
 		WishListener.showScreen();
 		WishListener.showForm();
 	},
+	//显示白色背景
 	showScreen : function(){
 		$("#all-screen").css("display","block");
 	},
+	//弹出表单
 	showForm : function(){
 		$("#wish-form").animate({
 			top : "100px"
 		},300);
 	},
+	//清理屏幕
 	clearScreen : function(){
 		$("#all-screen").css("display","none");
 		$("#wish-form").css("top","-300px");
 		$("#wish-form-content").val("");
 	},
+	//发送请求添加愿望树
 	addWish : function(event){
 		event.preventDefault();
 		if(wishVertify()){
@@ -58,6 +71,10 @@ var WishListener = {
 			};
 			sendAjax("/create_wish","post",{project_id:project_id,project_content:project_content},"json",cb);
 		}
+	},
+	//给元素绑定数据
+	setItemData : function(item,data){
+		
 	}
 };
 

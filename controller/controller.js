@@ -118,11 +118,25 @@ exports.c_create_wish = function(req, res){
 	};
 	db.insertWish(info,cb,err_cb);
 };
-//获取状态为iwish的愿望
-exports.c_wish_list_data_iwish = function(req ,res){
-
+//获取status不同的wish
+exports.c_wish_list_data = function(req ,res){
+	var info = {
+		mail : req.cookies.mail,
+		name : req.cookies.name,
+		user_id : req.cookies.user_id,
+		project_id : req.params.project_id,
+		index : req.params.index,
+		num : req.params.num,
+		status : req.params.status
+	},
+	cb = function(data){
+		write_back(res,data);
+	},
+	err_cb = function(err_info){
+		write_back(res,err_info);
+	};
+	db.selectWish(info,cb,err_cb);
 };
-//获取状态为ongoing的愿望
 
 
 function write_back(res,data){

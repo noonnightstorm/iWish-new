@@ -107,7 +107,7 @@ exports.insertProject = function(info,cb){
 	cb(project);
 };
 exports.selectWishList = function(info,cb,err_cb){
-	Wishs.find({project_id:info.project_id},numm,{skip:info.index,limit:num}).sort({_id:-1}).exec(function(err,wishs){
+	Wishs.find({project_id:info.project_id},null,{skip:info.index,limit:num}).sort({_id:-1}).exec(function(err,wishs){
 		if(err){
 			err_cb(err);
 		}
@@ -147,6 +147,38 @@ exports.insertWish = function(info,cb,err_cb){
 		}
 	});
 };
+exports.selectWish = function(info,cb,err_cb){
+	if(info.status == "iwish"){
+		Wishs.find({project_id:info.project_id,status:"iwish"},null,{skip:info.index,limit:info.num}).sort({_id:-1}).exec(function(err,wishs){
+			if(err){
+				err_cb(err);
+			}
+			if(wishs){
+				cb(wishs);
+			}
+		});
+	}
+	else if(info.status == "ongoing"){
+		Wishs.find({project_id:info.project_id,status:"ongoing"},function(err,wishs){
+			if(err){
+				err_cb(err);
+			}
+			if(wishs){
+				cb(wishs);
+			}
+		});
+	}
+	else if(info.status == "finish"){
+		Wishs.find({project_id:info.project_id,status:"finish"},null,{skip:info.index,limit:info.num}).sort({_id:-1}).exec(function(err,wishs){
+			if(err){
+				err_cb(err);
+			}
+			if(wishs){
+				cb(wishs);
+			}
+		});
+	}
+};
 /*exports.selectMyProject = function(info,err_cb,cb){
 	Projects.find({user_id:info.user_id},function(err,projects){
 		if(err){
@@ -154,29 +186,6 @@ exports.insertWish = function(info,cb,err_cb){
 		}
 		if(projects){
 			cb();
-		}
-	});
-};
-exports.insertWish = function(info,err_cb,cb){
-	Persons.findOne({_id:info.user_id},function(err,person){
-		if(err){
-			err_cb("select error");
-		}
-		if(person){
-			var date = new Date();
-			var Wish = new Wishs();
-			Wish.content = info.content;
-			Wish.project_id = info.project_id;
-			Wish.user.name = user.name;
-			Wish.user.avatar = user.avatar;
-			Wish.status = "iwish";
-			Wish.score = 0;
-			Wish.date = date.getFullYear()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getDate();
-			Wish.save();
-			cb();
-		}
-		else{
-			err_cb("select no persons");
 		}
 	});
 };
