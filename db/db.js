@@ -116,8 +116,36 @@ exports.selectWishList = function(info,cb,err_cb){
 		}
 	});
 };
-exports.insertWish = function(info,cb){
-	
+exports.selectProject = function(info,cb,err_cb){
+	Projects.findOne({_id:info.project_id},function(err,obj){
+		if(err){
+			err_cb(err);
+		}
+		if(obj){
+			cb(obj);
+		}
+	});
+};
+exports.insertWish = function(info,cb,err_cb){
+	Persons.findOne({mail:info.mail,name:info.name},function(err,person){
+		if(err){
+			err_cb(err);
+		}
+		if(person){
+			var wish = new Wishs();
+			var date = new Date();
+			wish.content = info.content;
+			wish.user.name = info.name;
+			wish.user.avatar = person.avatar;
+			wish.project_id = info.project_id;
+			wish.status = "iwish";
+			wish.score = 0;
+			wish.date = date.getFullYear()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getDate();
+			wish.new_mark = true;
+			wish.save();
+			cb();
+		}
+	});
 };
 /*exports.selectMyProject = function(info,err_cb,cb){
 	Projects.find({user_id:info.user_id},function(err,projects){

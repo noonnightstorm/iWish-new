@@ -87,14 +87,43 @@ exports.c_wish_list_data = function(req, res){
 	db.selectWishList(info,cb,err_cb);
 };
 
+//获取项目内容
+exports.c_init_project = function(req, res){
+	var info = {
+		project_id : req.params.project_id
+	};
+	var cb = function(data){
+		write_back(res,data);
+	};
+	var err_cb = function(err_info){
+		write_back(res,err_info);
+	};
+	db.selectProject(info,cb,err_cb);
+};
+
 //创建愿望
 exports.c_create_wish = function(req, res){
 	var info = {
 		mail : req.cookies.mail,
 		name : req.cookies.name,
-		user_id : req.cookies.user_id
+		user_id : req.cookies.user_id,
+		project_id : req.body.project_id,
+		content : req.body.project_content
+	},
+	cb = function(){
+		write_back(res,JSON.stringify({result:"success"}));
+	},
+	err_cb = function(err_info){
+		write_back(res,JSON.stringify({result:"fail",info:err_info}));
 	};
+	db.insertWish(info,cb,err_cb);
 };
+//获取状态为iwish的愿望
+exports.c_wish_list_data_iwish = function(req ,res){
+
+};
+//获取状态为ongoing的愿望
+
 
 function write_back(res,data){
 	if(typeof(data) == "object"){
