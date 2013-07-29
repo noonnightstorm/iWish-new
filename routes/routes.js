@@ -100,11 +100,19 @@ exports.r_create_wish = function(req, res){
 		controller.c_create_wish(req,res);
 	}
 };
-exports.r_wish_list_data= function(req ,res){
+exports.r_wish_list_data = function(req ,res){
 	var mail = req.cookies.mail;
 	var name = req.cookies.name;
 	var user_id = req.cookies.user_id;
 	if(mail && name && user_id){
 		controller.c_wish_list_data(req,res);
+	}
+};
+exports.r_add_score = function(req,res){
+	var mail = req.cookies.mail;
+	var name = req.cookies.name;
+	var user_id = req.cookies.user_id;
+	if(mail && name && user_id){
+		controller.c_add_score(req,res);
 	}
 };

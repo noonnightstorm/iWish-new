@@ -30,6 +30,7 @@ var Wish = new Schema({
 	status : String,
 	score: Number,
 	date : String ,
+	comment_num : Number,
 	new_mark : Boolean
 });
 var Comment = new Schema({
@@ -141,6 +142,7 @@ exports.insertWish = function(info,cb,err_cb){
 			wish.status = "iwish";
 			wish.score = 0;
 			wish.date = date.getFullYear()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getDate();
+			wish.comment_num = 0;
 			wish.new_mark = true;
 			wish.save();
 			cb();
@@ -179,16 +181,13 @@ exports.selectWish = function(info,cb,err_cb){
 		});
 	}
 };
-/*exports.selectMyProject = function(info,err_cb,cb){
-	Projects.find({user_id:info.user_id},function(err,projects){
+exports.updateScore = function(info,cb,err_cb){
+	Wishs.update({_id:info.wish_id},{$inc:{score:1}},function(err,wish){
 		if(err){
-			err_cb();
+			err_cb(err);
 		}
-		if(projects){
+		else{
 			cb();
 		}
 	});
 };
-exports.updataWishStatus = function(info,err_cb,cb){
-	
-};*/

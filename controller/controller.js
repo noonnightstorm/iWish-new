@@ -137,7 +137,20 @@ exports.c_wish_list_data = function(req ,res){
 	};
 	db.selectWish(info,cb,err_cb);
 };
-
+//加分
+exports.c_add_score = function(req, res){
+	var info = {
+		project_id : req.params.project_id,
+		wish_id : req.params.wish_id
+	},
+	cb = function(){
+		write_back(res,JSON.stringify({result:"success"}));
+	},
+	err_cb = function(err_info){
+		write_back(res,err_info);
+	};
+	db.updateScore(info,cb,err_cb);
+};
 
 function write_back(res,data){
 	if(typeof(data) == "object"){

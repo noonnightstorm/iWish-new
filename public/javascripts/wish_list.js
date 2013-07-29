@@ -21,19 +21,14 @@ var InitPage = {
 		sendAjax("/init_project/" + project_id,"get",null,"json",cb);
 	},
 	initWish : function(){
-		var project_id = $("#project-body").attr("pro_id");
-		var cb = function(data){
-			for(var i = 0;i < data.length;i++){
-				var item = $(Template.wish_list_item);
-			}
-		};
-		//初始化ongoing的愿望
-		sendAjax("/wish_list_data/"+project_id+"/null/null/ongoing","get",null,"json",cb);
-		//初始化iwish的愿望
+		WishListener.getOnGoingWish();
+		WishListener.getIWishWish();
 	}
 };
 
 var WishListener = {
+	index : 1,
+	num : 15,
 	//弹出提交单
 	listener : function(){
 		WishListener.showScreen();
@@ -72,9 +67,44 @@ var WishListener = {
 			sendAjax("/create_wish","post",{project_id:project_id,project_content:project_content},"json",cb);
 		}
 	},
+	getOnGoingWish : function(){
+		var url_items = window.location.href.split("/");
+		var project_id = url_items[url_items.length-1];
+		var cb = function(data){
+			var father = $(".status-going");
+			for(var i = 0;i < data.length;i++){
+				var item = $(Template.wish_list_item);
+				WishListener.setItemData(item,data[i]).appendTo(father);
+			}
+		};
+		//初始化ongoing的愿望
+		sendAjax("/wish_list_data/"+project_id+"/null/null/ongoing","get",null,"json",cb);
+	},
+	getIWishWish : function(){
+		var url_items = window.location.href.split("/");
+		var project_id = url_items[url_items.length-1];
+		var cb = function(data){
+			for(var i = 0;i < data.length;i++){
+				var father = $(".status-iwish");
+				var item = $(Template.wish_list_item);
+				WishListener.setItemData(item,data[i]).appendTo(father);
+			}
+			this.index = this.index + this.num;
+		};
+		//初始化iwish的愿望
+		sendAjax("/wish_list_data/"+project_id+"/"+this.index+"/"+this.num+"/iwish","get",null,"json",cb);
+	},
 	//给元素绑定数据
 	setItemData : function(item,data){
-		
+		item.find(".wish-status").attr("id","status-"+data.status);
+		item.find(".wish-avatar").attr("id","avatar-"+data.user.avatar);
+		item.find(".wish-content").text(data.content);
+		item.find(".wish-name").text(data.user.avatar);
+		item.find(".wish-date").text(data.date);
+		item.find(".comment-num").text(data.comment_num);
+		item.find(".wish-vote span").text(data.score);
+		//item.find(".wish-vote a").attr("href","/add_score/"+data.project_id+"/"+data._id);	
+		return item;
 	}
 };
 
@@ -101,8 +131,6 @@ var OperateListener = {
 		
 	}
 };
-
-
 
 function sendAjax (url, type, data, datatype, cb) {
 	$.ajax({

@@ -35,6 +35,7 @@ app.get('/create_pro_page/:mail/:name/:user_id' , routes.r_create_pro_page);
 app.get('/wish_list_page/:mail/:name/:user_id/:project_id' , routes.r_wish_list_page);
 app.get('/wish_list_data/:project_id/:index/:num/:status', routes.r_wish_list_data);
 app.get('/init_project/:project_id',routes.r_init_project);
+app.get('/add_score/:project_id/:wish_id', routes.r_add_score);
 app.post('/create_wish',routes.r_create_wish);
 app.post('/create_pro' , routes.r_create_pro);
 app.post('/login_check' , routes.r_login_check);
