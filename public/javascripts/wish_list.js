@@ -103,7 +103,11 @@ var WishListener = {
 		item.find(".wish-date").text(data.date);
 		item.find(".comment-num").text(data.comment_num);
 		item.find(".wish-vote span").text(data.score);
-		item.find(".wish-vote a").attr("p_id",data.project_id).attr("w_id",data._id).click(function(e){
+		item.find(".wish-vote a")
+		.attr("p_id",data.project_id)
+		.attr("w_id",data._id)
+		.attr("index",0)
+		.click(function(e){
 			var btn = $(e.target);
 			var project_id = btn.attr("p_id");
 			var wish_id = btn.attr("w_id");
@@ -120,33 +124,49 @@ var WishListener = {
 };
 
 var CommentListener = {
+	num : 5,
 	listener : function(e){
 		var btn = $(e.target);
 		if(btn.attr("mark") == "false"){
 			btn.attr("mark","true");
 			var father = $(btn).parents(".wish-item");
 			var comment = $(Template.comment_list_item_dialog);
-			comment.appendTo(father);
+			CommentListener.loading(comment).appendTo(father);
+			CommentListener.getData(btn);
 		}
 		else{
 			btn.attr("mark","false");
 			var father = $(btn).parents(".wish-item");
-			father.remove(".comment-box");
+			father.children(".comment-box").remove();
 		}
 	},
-	loading : function(){
-
+	loading : function(obj){
+		var loading = $(Template.comment_list_item_loading);
+		loading.appendTo(obj);
+		return obj;
 	},
-	getData : function(){
-
+	getData : function(btn){
+		var wish_id = btn.attr("w_id");
+		var index = btn.attr("index");
+		sendAjax("/comment_list_data/"+ wish_id +"/"+ index +"/" + CommentListener.num,"get",null,"json",function(data){
+			btn.attr("index",parseInt(index) + data.length);
+			var father = btn.parents(".wish-item");
+			var commentBox = father.children(".comment-box");
+			commentBox.children(".point-container").remove();
+			$(Template.comment_list_item_input).appendTo(commentBox);
+			for(var i = 0;i < data.length;i++){
+				var comment = $(comment_list_item_item);
+				comment.find(".person-text").text(data[i].user_name);
+				comment.find(".person-text").text(data[i].content);
+				comment.appendTo(commentBox);
+			}
+		});
+	},
+	addComment : function(){
+		
 	}
 };
 
-var AddScoreListner = {
-	listener : function(){
-
-	}
-};
 
 var OperateListener = {
 	listener : function(){

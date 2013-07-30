@@ -75,8 +75,8 @@ var Template = {
 	].join(""),
 	comment_list_item_item : [
 		'<div class="comment-box-row">',
-			'<span class="person-text">Storm:</span>',
-			'<span class="ordinary-text">这提议真好！</span>',
+			'<span class="person-text"></span>',
+			'<span class="ordinary-text"></span>',
 		'</div>'
 	].join("")
 };

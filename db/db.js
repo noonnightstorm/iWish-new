@@ -35,6 +35,7 @@ var Wish = new Schema({
 });
 var Comment = new Schema({
 	user_id : String , 
+	user_name : String ,
 	project_id : String ,
 	wish_id : String ,
 	content : String ,
@@ -109,7 +110,7 @@ exports.insertProject = function(info,cb){
 	cb(project);
 };
 exports.selectWishList = function(info,cb,err_cb){
-	Wishs.find({project_id:info.project_id},null,{skip:info.index,limit:num}).sort({_id:-1}).exec(function(err,wishs){
+	Wishs.find({project_id:info.project_id},null,{skip:info.index,limit:info.num}).sort({_id:-1}).exec(function(err,wishs){
 		if(err){
 			err_cb(err);
 		}
@@ -188,8 +189,17 @@ exports.updateScore = function(info,cb,err_cb){
 			err_cb(err);
 		}
 		else{
-			console.log(wish);
 			cb();
+		}
+	});
+};
+exports.selectComment = function(info, cb, err_cb){
+	Comments.find({wish_id:info.wish_id},null,{skip:info.index,limit:num}).sort({_id:-1}).exec(function(err,comments){
+		if(err){
+			err_cb(err);
+		}
+		if(comments){
+			cb(comments);
 		}
 	});
 };

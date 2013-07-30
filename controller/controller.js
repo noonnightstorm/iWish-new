@@ -151,6 +151,20 @@ exports.c_add_score = function(req, res){
 	};
 	db.updateScore(info,cb,err_cb);
 };
+exports.c_comment_list_data = function(req, res){
+	var info = {
+		wish_id : req.params.wish_id,
+		index : req.params.index,
+		num : req.params.num
+	},
+	cb = function(data){
+		write_back(res,data);
+	},
+	err_cb = function(err_info){
+		write_back(res,err_info);
+	};
+	db.selectComment(info,cb,err_cb);
+};
 
 function write_back(res,data){
 	if(typeof(data) == "object"){
