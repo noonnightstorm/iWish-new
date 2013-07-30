@@ -36,6 +36,7 @@ var Wish = new Schema({
 var Comment = new Schema({
 	user_id : String , 
 	project_id : String ,
+	wish_id : String ,
 	content : String ,
 	new_mark : Boolean ,
 });
@@ -187,6 +188,7 @@ exports.updateScore = function(info,cb,err_cb){
 			err_cb(err);
 		}
 		else{
+			console.log(wish);
 			cb();
 		}
 	});

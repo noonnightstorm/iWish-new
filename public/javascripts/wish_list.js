@@ -103,14 +103,36 @@ var WishListener = {
 		item.find(".wish-date").text(data.date);
 		item.find(".comment-num").text(data.comment_num);
 		item.find(".wish-vote span").text(data.score);
-		//item.find(".wish-vote a").attr("href","/add_score/"+data.project_id+"/"+data._id);	
+		item.find(".wish-vote a").attr("p_id",data.project_id).attr("w_id",data._id).click(function(e){
+			var btn = $(e.target);
+			var project_id = btn.attr("p_id");
+			var wish_id = btn.attr("w_id");
+			var self = btn;
+			var cb = function(data){
+				var text = self.siblings("span");
+				text.text(parseInt(text.text())+1);
+			};
+			sendAjax("/add_score/"+project_id+"/"+wish_id,"get",null,"json",cb);
+		});
+		item.find(".comment-text").attr("mark","false").attr("p_id",data.project_id).attr("w_id",data._id).click(CommentListener.listener);
 		return item;
 	}
 };
 
 var CommentListener = {
-	listener : function(){
-
+	listener : function(e){
+		var btn = $(e.target);
+		if(btn.attr("mark") == "false"){
+			btn.attr("mark","true");
+			var father = $(btn).parents(".wish-item");
+			var comment = $(Template.comment_list_item_dialog);
+			comment.appendTo(father);
+		}
+		else{
+			btn.attr("mark","false");
+			var father = $(btn).parents(".wish-item");
+			father.remove(".comment-box");
+		}
 	},
 	loading : function(){
 
