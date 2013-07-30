@@ -2,7 +2,7 @@ window.onload = function(){
 	InitPage.start();
 	$("#suggest").click(WishListener.listener);
 	$("#all-screen").click(WishListener.clearScreen);
-	$("#wish-form").submit(WishListener.addWish);
+	$("#wish-form-btn").submit(WishListener.addWish);
 }
 
 var InitPage = {
@@ -106,7 +106,6 @@ var WishListener = {
 		item.find(".wish-vote a")
 		.attr("p_id",data.project_id)
 		.attr("w_id",data._id)
-		.attr("index",0)
 		.click(function(e){
 			var btn = $(e.target);
 			var project_id = btn.attr("p_id");
@@ -118,12 +117,18 @@ var WishListener = {
 			};
 			sendAjax("/add_score/"+project_id+"/"+wish_id,"get",null,"json",cb);
 		});
-		item.find(".comment-text").attr("mark","false").attr("p_id",data.project_id).attr("w_id",data._id).click(CommentListener.listener);
+		item.find(".comment-text")
+		.attr("mark","false")
+		.attr("p_id",data.project_id)
+		.attr("w_id",data._id)
+		.attr("index",0)
+		.click(CommentListener.listener);
 		return item;
 	}
 };
 
 var CommentListener = {
+	//每次拉取的数量有限
 	num : 5,
 	listener : function(e){
 		var btn = $(e.target);
@@ -152,18 +157,29 @@ var CommentListener = {
 			btn.attr("index",parseInt(index) + data.length);
 			var father = btn.parents(".wish-item");
 			var commentBox = father.children(".comment-box");
-			commentBox.children(".point-container").remove();
-			$(Template.comment_list_item_input).appendTo(commentBox);
+			commentBox.children(".loading-box").remove();
+			var input = $(Template.comment_list_item_input);
+			input.find(".comment-submit-btn").click(CommentListener.addComment(wish_id));
+			input.appendTo(commentBox);
 			for(var i = 0;i < data.length;i++){
 				var comment = $(comment_list_item_item);
 				comment.find(".person-text").text(data[i].user_name);
-				comment.find(".person-text").text(data[i].content);
+				comment.find(".ordinary-text").text(data[i].content);
 				comment.appendTo(commentBox);
 			}
 		});
 	},
-	addComment : function(){
-		
+	addComment : function(wish_id){
+		return function(e){
+			var url_items = window.location.href.split("/");
+			var project_id = url_items[url_items.length-1];
+			var content = $(e.target).siblings(".comment-input").val();
+			//这里迟点修改下
+			var cb = function(){
+
+			};
+			sendAjax("/create_comment","post",{project_id : project_id,wish_id : wish_id,content : content},"json",cb);
+		}
 	}
 };
 

@@ -194,7 +194,7 @@ exports.updateScore = function(info,cb,err_cb){
 	});
 };
 exports.selectComment = function(info, cb, err_cb){
-	Comments.find({wish_id:info.wish_id},null,{skip:info.index,limit:num}).sort({_id:-1}).exec(function(err,comments){
+	Comments.find({wish_id:info.wish_id},null,{skip:info.index,limit:info.num}).sort({_id:-1}).exec(function(err,comments){
 		if(err){
 			err_cb(err);
 		}
@@ -202,4 +202,15 @@ exports.selectComment = function(info, cb, err_cb){
 			cb(comments);
 		}
 	});
+};
+exports.insertComment = function(info, cb, err_cb){
+	var comment = new Comments();
+	comment.user_id = info.user_id;
+	comment.user_name = info.user_name;
+	comment.project_id = info.project_id;
+	comment.wish_id = info.wish_id;
+	comment.content = info.content;
+	comment.new_mark = true;
+	comment.save();
+	cb();
 };

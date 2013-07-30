@@ -165,6 +165,22 @@ exports.c_comment_list_data = function(req, res){
 	};
 	db.selectComment(info,cb,err_cb);
 };
+exports.c_create_wish = function(req, res){
+	var info = {
+		user_id : req.cookies.user_id,
+		user_name : req.cookies.user_name,
+		project_id : req.body.project_id,
+		wish_id : req.body.wish_id,
+		content : req.body.content
+	},
+	cb = function(){
+		write_back(res,JSON.stringify({result:"success"}));
+	},
+	err_cb = function(err_info){
+		write_back(res,err_info);
+	};
+	db.insertComment(info,cb,err_cb);
+};
 
 function write_back(res,data){
 	if(typeof(data) == "object"){

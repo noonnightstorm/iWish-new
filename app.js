@@ -37,10 +37,12 @@ app.get('/wish_list_data/:project_id/:index/:num/:status', routes.r_wish_list_da
 app.get('/init_project/:project_id',routes.r_init_project);
 app.get('/add_score/:project_id/:wish_id', routes.r_add_score);
 app.get('/comment_list_data/:wish_id/:index/:num',routes.r_comment_list_data);
+app.post('/create_comment',routes.r_create_wish);
 app.post('/create_wish',routes.r_create_wish);
 app.post('/create_pro' , routes.r_create_pro);
 app.post('/login_check' , routes.r_login_check);
 app.post('/register_addUser' , routes.r_register_addUser);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

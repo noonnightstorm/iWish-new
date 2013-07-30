@@ -77,6 +77,7 @@ exports.r_wish_list_data = function(req, res){
 	}
 };
 exports.r_create_wish = function(req, res){
+	console.log("create wish!");
 	var mail = req.cookies.mail;
 	var name = req.cookies.name;
 	var user_id = req.cookies.user_id;
@@ -122,5 +123,13 @@ exports.r_comment_list_data = function(req, res){
 	var user_id = req.cookies.user_id;
 	if(mail && name && user_id){
 		controller.c_comment_list_data(req,res);
+	}
+};
+exports.r_create_wish = function(req, res){
+	var mail = req.cookies.mail;
+	var name = req.cookies.name;
+	var user_id = req.cookies.user_id;
+	if(mail && name && user_id){
+		controller.c_create_wish(req,res);
 	}
 };
