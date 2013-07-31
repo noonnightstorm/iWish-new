@@ -199,7 +199,6 @@ exports.selectComment = function(info, cb, err_cb){
 			err_cb(err);
 		}
 		if(comments){
-			console.log(comments);
 			cb(comments);
 		}
 	});
@@ -213,12 +212,13 @@ exports.insertComment = function(info, cb, err_cb){
 	comment.content = info.content;
 	comment.new_mark = true;
 	comment.save();
-	Projects.update({_id:project_id},{$inc:{comment_num:1}},function(err,project){
+	console.log(info);
+	Projects.update({_id:info.project_id},{$inc:{comment_num:1}},function(err,project){
 		if(err){
 			err_cb(err);
 		}
 	});
-	Wishs.update({_id:wish_id},{$inc:{comment_num:1}},function(err,wish){
+	Wishs.update({_id:info.wish_id},{$inc:{comment_num:1}},function(err,wish){
 		if(err){
 			err_cb(err);
 		}

@@ -170,7 +170,7 @@ exports.c_comment_list_data = function(req, res){
 exports.c_create_comment= function(req, res){
 	var info = {
 		user_id : req.cookies.user_id,
-		user_name : req.cookies.user_name,
+		user_name : req.cookies.name,
 		project_id : req.body.project_id,
 		wish_id : req.body.wish_id,
 		content : req.body.content

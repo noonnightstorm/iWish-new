@@ -75,7 +75,8 @@ var Template = {
 	].join(""),
 	comment_list_item_item : [
 		'<div class="comment-box-row">',
-			'<span class="person-text"></span>',
+			'<span class="person-text orange"></span>',
+			'<span class="orange">&nbsp:&nbsp</span>',
 			'<span class="ordinary-text"></span>',
 		'</div>'
 	].join("")

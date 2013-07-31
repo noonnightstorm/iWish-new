@@ -166,6 +166,7 @@ var CommentListener = {
 			input.appendTo(commentBox);
 			//append data dom
 			for(var i = 0;i < data.length;i++){
+				console.log(data);
 				var comment = $(Template.comment_list_item_item);
 				comment.find(".person-text").text(data[i].user_name);
 				comment.find(".ordinary-text").text(data[i].content);
@@ -184,6 +185,8 @@ var CommentListener = {
 				commentNum.text(parseInt(commentNum.text()) + 1);
 				//清空对话框
 				$(e.target).siblings("input").val("");
+				//加上评论,这里需要修改!!!!!!!!
+
 			};
 			sendAjax("/create_comment","post",{project_id : project_id,wish_id : wish_id,content : content},"json",cb);
 		}
