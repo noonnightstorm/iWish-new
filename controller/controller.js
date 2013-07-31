@@ -151,6 +151,7 @@ exports.c_add_score = function(req, res){
 	};
 	db.updateScore(info,cb,err_cb);
 };
+//获取评论数据
 exports.c_comment_list_data = function(req, res){
 	var info = {
 		wish_id : req.params.wish_id,
@@ -165,7 +166,8 @@ exports.c_comment_list_data = function(req, res){
 	};
 	db.selectComment(info,cb,err_cb);
 };
-exports.c_create_wish = function(req, res){
+//添加评论
+exports.c_create_comment= function(req, res){
 	var info = {
 		user_id : req.cookies.user_id,
 		user_name : req.cookies.user_name,

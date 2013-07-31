@@ -2,7 +2,7 @@ window.onload = function(){
 	InitPage.start();
 	$("#suggest").click(WishListener.listener);
 	$("#all-screen").click(WishListener.clearScreen);
-	$("#wish-form-btn").submit(WishListener.addWish);
+	$("#wish-form").submit(WishListener.addWish);
 }
 
 var InitPage = {
@@ -27,7 +27,7 @@ var InitPage = {
 };
 
 var WishListener = {
-	index : 1,
+	index : 0,
 	num : 15,
 	//弹出提交单
 	listener : function(){
@@ -140,7 +140,7 @@ var CommentListener = {
 			CommentListener.getData(btn);
 		}
 		else{
-			btn.attr("mark","false");
+			btn.attr("mark","false").attr("index","0");
 			var father = $(btn).parents(".wish-item");
 			father.children(".comment-box").remove();
 		}
@@ -154,15 +154,19 @@ var CommentListener = {
 		var wish_id = btn.attr("w_id");
 		var index = btn.attr("index");
 		sendAjax("/comment_list_data/"+ wish_id +"/"+ index +"/" + CommentListener.num,"get",null,"json",function(data){
+			//add index 
 			btn.attr("index",parseInt(index) + data.length);
+			//remove loading
 			var father = btn.parents(".wish-item");
 			var commentBox = father.children(".comment-box");
 			commentBox.children(".loading-box").remove();
+			//append input row
 			var input = $(Template.comment_list_item_input);
 			input.find(".comment-submit-btn").click(CommentListener.addComment(wish_id));
 			input.appendTo(commentBox);
+			//append data dom
 			for(var i = 0;i < data.length;i++){
-				var comment = $(comment_list_item_item);
+				var comment = $(Template.comment_list_item_item);
 				comment.find(".person-text").text(data[i].user_name);
 				comment.find(".ordinary-text").text(data[i].content);
 				comment.appendTo(commentBox);
@@ -174,21 +178,18 @@ var CommentListener = {
 			var url_items = window.location.href.split("/");
 			var project_id = url_items[url_items.length-1];
 			var content = $(e.target).siblings(".comment-input").val();
-			//这里迟点修改下
 			var cb = function(){
-
+				//评论数加1
+				var commentNum = $(e.target).parents(".wish-item").find(".comment-num");
+				commentNum.text(parseInt(commentNum.text()) + 1);
+				//清空对话框
+				$(e.target).siblings("input").val("");
 			};
 			sendAjax("/create_comment","post",{project_id : project_id,wish_id : wish_id,content : content},"json",cb);
 		}
 	}
 };
 
-
-var OperateListener = {
-	listener : function(){
-		
-	}
-};
 
 function sendAjax (url, type, data, datatype, cb) {
 	$.ajax({
