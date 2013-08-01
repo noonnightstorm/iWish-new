@@ -16,7 +16,7 @@ function login_check(event){
 				document.cookie = "name="+data.name;
 				document.cookie = "user_id="+data.user_id;
 				document.cookie = "status=user";
-				window.location.href = "/pro_list_page/"+ data.mail + "/" + data.name + "/" + data.user_id;
+				window.location.href = "/pro_list_page/null";
 				return true;
 			}
 			else if (data.result == "fail"){
@@ -45,7 +45,7 @@ function register_check(event){
 				document.cookie = "name="+data.name;
 				document.cookie = "user_id="+data.user_id;
 				document.cookie = "status=user";
-				window.location.href = "/pro_list_page/" + data.mail + "/" + data.name + "/" + data.user_id;
+				window.location.href = "/pro_list_page/null";
 			}
 		});
 	}

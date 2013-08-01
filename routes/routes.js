@@ -16,10 +16,10 @@ exports.r_register_addUser = function(req , res){
 };
 
 exports.r_pro_list_page = function(req , res){
-	var mail = req.params.mail;
-	var name = req.params.name;
-	var user_id = req.params.user_id;
-	if(mail && name && (mail == req.cookies.mail) && (name == req.cookies.name)){
+	var mail = req.cookies.mail;
+	var name = req.cookies.name;
+	var user_id = req.cookies.user_id;
+	if(mail && name && user_id){
 		res.render('pro_list',{
 			mail : mail ,
 			name : name ,
@@ -27,8 +27,8 @@ exports.r_pro_list_page = function(req , res){
 		});
 	}
 };
-
 exports.r_pro_list_data = function(req , res){
+	console.log(req.params.user_id);
 	if(req.cookies.mail && req.cookies.name && req.cookies.status){
 		controller.c_pro_list_data(req,res);
 	}
@@ -64,6 +64,17 @@ exports.r_wish_list_page = function(req, res){
 			mail : mail,
 			name : name,
 			user_id : user_id,
+			project_id : project_id
+		});
+	}
+};
+exports.r_finish_wish_list_page = function(req, res){
+	var mail = req.cookies.mail
+	,name = req.cookies.name
+	,user_id = req.cookies.user_id
+	,project_id = req.params.project_id;
+	if(mail&&name&&user_id&&project_id)/{
+		res.render("finish_wish_list",{
 			project_id : project_id
 		});
 	}

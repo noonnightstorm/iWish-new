@@ -34,12 +34,14 @@ exports.c_register_addUser = function(req , res){
 //获取项目列表的数据
 exports.c_pro_list_data = function(req , res){
 	var index = parseInt(req.params.index)
-	,num = parseInt(req.params.num);
+	,num = parseInt(req.params.num)
+	,user_id = req.params.user_id;
 	//num为返回数据的数量，不能太多
 	if(!isNaN(index) && !isNaN(num) && num <=25){
 		var info = {
 			index : index,
-			num : num
+			num : num,
+			user_id : user_id
 		};
 		var cb = function(data){
 			write_back(res,data);

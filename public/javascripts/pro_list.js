@@ -24,9 +24,11 @@ var ScrollEvent = {
 	getData : function(){
 		var index = ScrollEvent.index_count*ScrollEvent.project_num;
 		var num = ScrollEvent.project_num;
+		var urlItems = window.location.href.split("/");
+		var mark = urlItems[urlItems.length-1];
 		if(num != 0){
 			$.ajax({
-				url : "/pro_list_data/" + index + "/" + num,
+				url : "/pro_list_data/" + index + "/" + num + "/" + mark,
 				type : "get",
 				datatype : "json",
 				success : function(data){

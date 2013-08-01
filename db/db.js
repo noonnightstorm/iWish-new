@@ -75,8 +75,8 @@ exports.insertUser = function(info,cb){
 	}
 };
 exports.selectProjectList = function(info,cb,err_cb){
-	if(info.mail && info.name){
-		Projects.find({mail:info.mail,name:info.name},null,{skip:info.index,limit:info.num}).sort({_id:-1}).exec(function(err,projects){
+	if(info.user_id != "null"){
+		Projects.find({user_id : info.user_id},null,{skip:info.index,limit:info.num}).sort({_id:-1}).exec(function(err,projects){
 			if(err){
 				err_cb(err);
 			}
