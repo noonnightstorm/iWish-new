@@ -109,16 +109,6 @@ exports.insertProject = function(info,cb){
 	project.save();
 	cb(project);
 };
-exports.selectWishList = function(info,cb,err_cb){
-	Wishs.find({project_id:info.project_id},null,{skip:info.index,limit:info.num}).sort({_id:-1}).exec(function(err,wishs){
-		if(err){
-			err_cb(err);
-		}
-		if(wishs){
-			cb(wishs);
-		}
-	});
-};
 exports.selectProject = function(info,cb,err_cb){
 	Projects.findOne({_id:info.project_id},function(err,obj){
 		if(err){

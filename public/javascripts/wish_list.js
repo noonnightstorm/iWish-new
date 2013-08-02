@@ -84,12 +84,23 @@ var WishListener = {
 		var url_items = window.location.href.split("/");
 		var project_id = url_items[url_items.length-1];
 		var cb = function(data){
-			for(var i = 0;i < data.length;i++){
-				var father = $(".status-iwish");
-				var item = $(Template.wish_list_item);
-				WishListener.setItemData(item,data[i]).appendTo(father);
+			//根据有没加载tips进行不同的加载方式
+			var moreTip = $(".show-more-wish");
+			if(moreTip){
+
 			}
-			this.index = this.index + this.num;
+			else{
+				for(var i = 0;i < data.length;i++){
+					var father = $(".status-iwish");
+					var item = $(Template.wish_list_item);
+					WishListener.setItemData(item,data[i]).appendTo(father);
+				}
+				this.index = this.index + this.num;
+				if(this.num > date.length){
+					var tips = $(Template.wish_list_more);
+					
+				}
+			}
 		};
 		//初始化iwish的愿望
 		sendAjax("/wish_list_data/"+project_id+"/"+this.index+"/"+this.num+"/iwish","get",null,"json",cb);
@@ -166,12 +177,12 @@ var CommentListener = {
 			input.appendTo(commentBox);
 			//append data dom
 			for(var i = 0;i < data.length;i++){
-				console.log(data);
 				var comment = $(Template.comment_list_item_item);
 				comment.find(".person-text").text(data[i].user_name);
 				comment.find(".ordinary-text").text(data[i].content);
 				comment.appendTo(commentBox);
 			}
+			//这里加载更多，需要修改一下
 		});
 	},
 	addComment : function(wish_id){

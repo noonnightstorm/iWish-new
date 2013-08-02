@@ -73,7 +73,7 @@ exports.r_finish_wish_list_page = function(req, res){
 	,name = req.cookies.name
 	,user_id = req.cookies.user_id
 	,project_id = req.params.project_id;
-	if(mail&&name&&user_id&&project_id)/{
+	if(mail&&name&&user_id&&project_id){
 		res.render("finish_wish_list",{
 			project_id : project_id
 		});
