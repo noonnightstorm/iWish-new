@@ -119,6 +119,21 @@ exports.selectProject = function(info,cb,err_cb){
 		}
 	});
 };
+exports.selectProjectWishPsw = function(info,cb,err_cb){
+	Projects.findOne({_id:info.project_id},function(err,obj){
+		if(err){
+			err_cb(err);
+		}
+		if(obj){
+			if(obj.password == info.p_psw){
+				cb(JSON.stringify({result:"success"}));
+			}
+			else{
+				cb(JSON.stringify({result:"wrong"}));
+			}
+		}
+	});
+};
 exports.insertWish = function(info,cb,err_cb){
 	Persons.findOne({mail:info.mail,name:info.name},function(err,person){
 		if(err){

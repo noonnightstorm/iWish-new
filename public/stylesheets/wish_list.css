@@ -191,6 +191,27 @@
 .footer-author{
 	width: 100%;
 }
+.footer-box .wish-tree-menu{
+	padding-top: 40px;
+	width: 400px;
+}
+.wish-menu-input{
+	display: inline-block;
+	margin: 0;
+}
+.wish-menu-btn{
+	height: 30px;
+	width: 80px;
+	margin-left: 10px;
+	cursor: pointer;
+}
+.wish-menu-btn:hover{
+	background-color:#EC6941;
+	color: #FFF;
+}
+.wish-tree-menu-a{
+	padding:10px 0 0 110px;
+}
 
 .all-screen{
 	position: fixed;

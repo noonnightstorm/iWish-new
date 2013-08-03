@@ -150,7 +150,7 @@ exports.c_comment_list_data = function(req, res){
 	db.selectComment(info,cb,err_cb);
 };
 //添加评论
-exports.c_create_comment= function(req, res){
+exports.c_create_comment = function(req, res){
 	var info = {
 		user_id : req.cookies.user_id,
 		user_name : req.cookies.name,
@@ -165,6 +165,20 @@ exports.c_create_comment= function(req, res){
 		write_back(res,err_info);
 	};
 	db.insertComment(info,cb,err_cb);
+};
+//检查项目密码
+exports.c_project_check = function(req, res){
+	var info = {
+		project_id : req.body.project_id,
+		p_psw : req.body.p_psw
+	},
+	cb = function(data){
+		write_back(res,data);
+	},
+	err_cb = function(err_info){
+		write_back(res,err_info);
+	};
+	db.selectProjectWishPsw(info,cb,err_cb);
 };
 
 function write_back(res,data){

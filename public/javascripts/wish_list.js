@@ -86,27 +86,22 @@ var WishListener = {
 		var cb = function(data){
 			//根据有没加载tips进行不同的加载方式
 			var moreTip = $(".show-more-wish");
-			if(moreTip){
-
+			for(var i = 0;i < data.length;i++){
+				var father = $(".status-iwish");
+				var item = $(Template.wish_list_item);
+				WishListener.setItemData(item,data[i]).appendTo(father);
 			}
-			else{
-				for(var i = 0;i < data.length;i++){
-					var father = $(".status-iwish");
-					var item = $(Template.wish_list_item);
-					WishListener.setItemData(item,data[i]).appendTo(father);
-				}
-				this.index = this.index + this.num;
-				if(this.num > date.length){
-					var tips = $(Template.wish_list_more);
-					
-				}
-			}
+			this.index = this.index + this.num;
+			/*if(this.num > data.length){
+				var tips = $(Template.wish_list_more);
+			}*/
 		};
 		//初始化iwish的愿望
 		sendAjax("/wish_list_data/"+project_id+"/"+this.index+"/"+this.num+"/iwish","get",null,"json",cb);
 	},
 	//给元素绑定数据
 	setItemData : function(item,data){
+		item.attr("w_id",data._id);
 		item.find(".wish-status").attr("id","status-"+data.status);
 		item.find(".wish-avatar").attr("id","avatar-"+data.user.avatar);
 		item.find(".wish-content").text(data.content);
@@ -201,6 +196,25 @@ var CommentListener = {
 			};
 			sendAjax("/create_comment","post",{project_id : project_id,wish_id : wish_id,content : content},"json",cb);
 		}
+	}
+};
+
+var ToolBar = {
+	pass : function () {
+		if(menuManagerVertify()){
+			var url_items = window.location.href.split("/");
+			var project_id = url_items[url_items.length-1];
+			var cb = function(data){
+				
+			}
+			sendAjax("/project_check","post",{p_psw : $("#wish-menu-input").val(),project_id:project_id},"json",cb);
+		}
+	},
+	IwishToGoing : function(){
+
+	},
+	GoingToFinish : function(){
+
 	}
 };
 

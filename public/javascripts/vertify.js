@@ -62,14 +62,14 @@ function wishVertify(){
 	}
 	return true;
 }
-/*
-function projectEnterVertify(){
+
+function menuManagerVertify(){
 	var $wish_menu_input = $("#wish-menu-input");
 	if(!vertify($wish_menu_input,0,"#FFF7F4","#ffb9b9")){
 		return false;
 	}
 	return true;
-}*/
+}
 
 function vertify(obj,len,old_col,new_col){
 	obj.css("background",old_col);
