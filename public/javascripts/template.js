@@ -42,20 +42,20 @@ var Template = {
 	].join(""),
 	iwish_list_item_bar : [
 		'<div class="wish-operate">',
-			'<a href="">更多</a>',
+			'<a href="javascript:;">更多</a>',
 			'&nbsp',
-			'<a href="">获准</a>',
+			'<a href="javascript:;" class="operate-iwish">获准</a>',
 			'&nbsp',
-			'<a href="">删除</a>',
+			'<a href="javascript:;" class="operate-detele">删除</a>',
 		'</div>'
 	].join(""),
 	ongoing_list_item_bar : [
 		'<div class="wish-operate">',
-			'<a href="">更多</a>',
+			'<a href="javascript:;">更多</a>',
 			'&nbsp',
-			'<a href="">完成</a>',
+			'<a href="javascript:;" class="operate-ongoing">完成</a>',
 			'&nbsp',
-			'<a href="">删除</a>',
+			'<a href="javascript:;" class="operate-detele">删除</a>',
 		'</div>'
 	].join(""),
 	comment_list_item_dialog : [

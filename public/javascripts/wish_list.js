@@ -214,10 +214,12 @@ var ToolBar = {
 						if(item.attr("status") == "iwish"){
 							var tool = $(Template.iwish_list_item_bar);
 							tool.insertBefore(itemContent);
+							tool.find(".operate-detele").click(ToolBar.deleteWish);
 						}
 						else if(item.attr("status") == "ongoing"){
 							var tool = $(Template.ongoing_list_item_bar);
 							tool.insertBefore(itemContent);
+							tool.find(".operate-detele").click(ToolBar.deleteWish);
 						}
 					}
 				}
@@ -228,11 +230,15 @@ var ToolBar = {
 			sendAjax("/project_check","post",{p_psw : $("#wish-menu-input").val(),project_id:project_id},"json",cb);
 		}
 	},
-	IwishToGoing : function(){
+	iwishToGoing : function(){
 
+		//sendAjax("/update_wish_status","post",{wish_id:,p_status:"iwish"},"json",cb);
 	},
-	GoingToFinish : function(){
-
+	goingToFinish : function(){
+		//sendAjax("/update_wish_status","post",{wish_id:,p_status:"ongoing"},"json",cb);
+	},
+	deleteWish : function(){
+		console.log("detele");
 	}
 };
 
