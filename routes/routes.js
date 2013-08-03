@@ -143,7 +143,7 @@ exports.r_create_wish = function(req, res){
 		controller.c_create_wish(req,res);
 	}
 };
-exports.r_project_check = function(){
+exports.r_project_check = function(req, res){
 	var mail = req.cookies.mail;
 	var name = req.cookies.name;
 	var user_id = req.cookies.user_id;

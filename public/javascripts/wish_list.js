@@ -3,6 +3,7 @@ window.onload = function(){
 	$("#suggest").click(WishListener.listener);
 	$("#all-screen").click(WishListener.clearScreen);
 	$("#wish-form").submit(WishListener.addWish);
+	$("#wish-menu-btn").click(ToolBar.pass);
 }
 
 var InitPage = {
@@ -101,7 +102,7 @@ var WishListener = {
 	},
 	//给元素绑定数据
 	setItemData : function(item,data){
-		item.attr("w_id",data._id);
+		item.attr("w_id",data._id).attr("status",data.status);
 		item.find(".wish-status").attr("id","status-"+data.status);
 		item.find(".wish-avatar").attr("id","avatar-"+data.user.avatar);
 		item.find(".wish-content").text(data.content);
@@ -205,7 +206,24 @@ var ToolBar = {
 			var url_items = window.location.href.split("/");
 			var project_id = url_items[url_items.length-1];
 			var cb = function(data){
-				
+				if(data.result == "success"){
+					var items = $(".wish-item");
+					for(var i = 0;i < items.length;i++){
+						var item = $(items[i]);
+						var itemContent = item.find(".wish-content");
+						if(item.attr("status") == "iwish"){
+							var tool = $(Template.iwish_list_item_bar);
+							tool.insertBefore(itemContent);
+						}
+						else if(item.attr("status") == "ongoing"){
+							var tool = $(Template.ongoing_list_item_bar);
+							tool.insertBefore(itemContent);
+						}
+					}
+				}
+				else{
+					$("#wish-menu-input").val("").css("background","#ffb9b9");
+				}
 			}
 			sendAjax("/project_check","post",{p_psw : $("#wish-menu-input").val(),project_id:project_id},"json",cb);
 		}

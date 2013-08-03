@@ -40,11 +40,20 @@ var Template = {
 			'<span class="more-wish-arrow"></span>',
 		'</a>'
 	].join(""),
-	wish_list_item_operate_bar : [
+	iwish_list_item_bar : [
 		'<div class="wish-operate">',
 			'<a href="">更多</a>',
 			'&nbsp',
 			'<a href="">获准</a>',
+			'&nbsp',
+			'<a href="">删除</a>',
+		'</div>'
+	].join(""),
+	ongoing_list_item_bar : [
+		'<div class="wish-operate">',
+			'<a href="">更多</a>',
+			'&nbsp',
+			'<a href="">完成</a>',
 			'&nbsp',
 			'<a href="">删除</a>',
 		'</div>'
