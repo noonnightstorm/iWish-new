@@ -38,6 +38,8 @@ app.get('/init_project/:project_id',routes.r_init_project);
 app.get('/add_score/:project_id/:wish_id', routes.r_add_score);
 app.get('/comment_list_data/:wish_id/:index/:num',routes.r_comment_list_data);
 app.get('/finish_wish_list_page/:project_id',routes.r_finish_wish_list_page);
+app.post('/update_wish_status',routes.r_update_wish_status);
+app.post('/delete_wish',routes.r_delete_wish);
 app.post('/project_check',routes.r_project_check);
 app.post('/create_comment',routes.r_create_comment);
 app.post('/create_wish',routes.r_create_wish);

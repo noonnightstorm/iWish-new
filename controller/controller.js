@@ -180,6 +180,33 @@ exports.c_project_check = function(req, res){
 	};
 	db.selectProjectWishPsw(info,cb,err_cb);
 };
+//删除愿望
+exports.c_delete_wish = function(req, res){
+	var info = {
+		wish_id : req.body.wish_id
+	},
+	cb = function(){
+		write_back(res,JSON.stringify({result:"success"}));
+	},
+	err_cb = function(err_info){
+		write_back(res,err_info);
+	};
+	db.removeWish(info,cb,err_cb);
+};
+//更新愿望状态
+exports.c_update_wish_status = function(req,res){
+	var info = {
+		wish_id : req.body.wish_id,
+		status : req.body.status
+	},
+	cb = function(){
+		write_back(res,JSON.stringify({result:"success"}));
+	},
+	err_cb = function(){
+		write_back(res,err_info);
+	};
+	db.updateWishStatus(info,cb,err_cb);
+};
 
 function write_back(res,data){
 	if(typeof(data) == "object"){

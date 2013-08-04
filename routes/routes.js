@@ -119,6 +119,14 @@ exports.r_wish_list_data = function(req ,res){
 		controller.c_wish_list_data(req,res);
 	}
 };
+exports.r_delete_wish = function(req, res){
+	var mail = req.cookies.mail;
+	var name = req.cookies.name;
+	var user_id = req.cookies.user_id;
+	if(mail && name && user_id){
+		controller.c_delete_wish(req,res);
+	}
+};
 exports.r_add_score = function(req,res){
 	var mail = req.cookies.mail;
 	var name = req.cookies.name;
@@ -149,5 +157,13 @@ exports.r_project_check = function(req, res){
 	var user_id = req.cookies.user_id;
 	if(mail && name && user_id){
 		controller.c_project_check(req,res);
+	}
+};
+exports.r_update_wish_status = function(req,res){
+	var mail = req.cookies.mail;
+	var name = req.cookies.name;
+	var user_id = req.cookies.user_id;
+	if(mail && name && user_id){
+		controller.c_update_wish_status(req,res);
 	}
 };

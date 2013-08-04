@@ -230,3 +230,24 @@ exports.insertComment = function(info, cb, err_cb){
 	});
 	cb();
 };
+exports.removeWish = function(info, cb, err_cb){
+	Wishs.remove({_id:info.wish_id},function(err){
+		if(err){
+			err_cb(err);
+		}
+		else{
+			cb();
+		}
+	});
+};
+exports.updateWishStatus = function(info,cb,err_cb){
+	//some problem
+	Wishs.update({_id:info._id},{$set:{status:info.status}},function(err,obj){
+		if(err){
+			err_cb(err);
+		}
+		else{
+			cb();
+		}
+	});
+};

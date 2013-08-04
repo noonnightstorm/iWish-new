@@ -214,12 +214,14 @@ var ToolBar = {
 						if(item.attr("status") == "iwish"){
 							var tool = $(Template.iwish_list_item_bar);
 							tool.insertBefore(itemContent);
-							tool.find(".operate-detele").click(ToolBar.deleteWish);
+							tool.find(".operate-detele").click(ToolBar.deleteWish(item.attr("w_id")));
+							tool.find(".operate-iwish").click(ToolBar.iwishToGoing(item.attr("w_id")));
 						}
 						else if(item.attr("status") == "ongoing"){
 							var tool = $(Template.ongoing_list_item_bar);
 							tool.insertBefore(itemContent);
 							tool.find(".operate-detele").click(ToolBar.deleteWish);
+							tool.find(".operate-ongoing").click(ToolBar.goingToFinish);
 						}
 					}
 				}
@@ -230,15 +232,27 @@ var ToolBar = {
 			sendAjax("/project_check","post",{p_psw : $("#wish-menu-input").val(),project_id:project_id},"json",cb);
 		}
 	},
-	iwishToGoing : function(){
-
-		//sendAjax("/update_wish_status","post",{wish_id:,p_status:"iwish"},"json",cb);
+	iwishToGoing : function(wish_id){
+		return function(){
+			sendAjax("/update_wish_status","post",{wish_id:wish_id,status:"ongoing"},"json",cb);
+		};
 	},
-	goingToFinish : function(){
-		//sendAjax("/update_wish_status","post",{wish_id:,p_status:"ongoing"},"json",cb);
+	goingToFinish : function(wish_id){
+		return function(){
+			sendAjax("/update_wish_status","post",{wish_id:wish_id,status:"finish"},"json",cb);
+		};
 	},
-	deleteWish : function(){
-		console.log("detele");
+	deleteWish : function(e){
+		var wish_id = $(e.target).parents(".wish-item").attr("w_id");
+		cb = function(data){
+			if(data.result == "success"){
+				$(e.target).parents(".wish-item").remove();
+			}
+			else{
+				//later
+			}
+		};
+		sendAjax("/delete_wish","post",{wish_id:wish_id},"json",cb);
 	}
 };
 
