@@ -54,12 +54,11 @@ exports.r_create_pro = function(req, res){
 };
 
 exports.r_wish_list_page = function(req, res){
-	var mail = req.params.mail
-	,name = req.params.name
-	,user_id = req.params.user_id
-	,project_id = req.params.project_id
-	,cookies = req.cookies;
-	if(mail&&name&&user_id&&project_id&&mail==cookies.mail&&name==cookies.name&&user_id==cookies.user_id){
+	var mail = req.cookies.mail
+	,name = req.cookies.name
+	,user_id = req.cookies.user_id
+	,project_id = req.params.project_id;
+	if(mail && name && user_id && project_id){
 		res.render("wish_list",{
 			mail : mail,
 			name : name,
@@ -73,7 +72,7 @@ exports.r_finish_wish_list_page = function(req, res){
 	,name = req.cookies.name
 	,user_id = req.cookies.user_id
 	,project_id = req.params.project_id;
-	if(mail&&name&&user_id&&project_id){
+	if(mail && name && user_id && project_id){
 		res.render("finish_wish_list",{
 			project_id : project_id
 		});

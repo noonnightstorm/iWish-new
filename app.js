@@ -32,7 +32,7 @@ app.get('/register_page' , routes.r_register);
 app.get('/pro_list_page/:user_id' , routes.r_pro_list_page); 
 app.get('/pro_list_data/:index/:num/:user_id' , routes.r_pro_list_data);
 app.get('/create_pro_page/:mail/:name/:user_id' , routes.r_create_pro_page);
-app.get('/wish_list_page/:mail/:name/:user_id/:project_id' , routes.r_wish_list_page);
+app.get('/wish_list_page/:project_id' , routes.r_wish_list_page);
 app.get('/wish_list_data/:project_id/:index/:num/:status', routes.r_wish_list_data);
 app.get('/init_project/:project_id',routes.r_init_project);
 app.get('/add_score/:project_id/:wish_id', routes.r_add_score);

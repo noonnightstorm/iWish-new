@@ -221,7 +221,7 @@ var ToolBar = {
 							var tool = $(Template.ongoing_list_item_bar);
 							tool.insertBefore(itemContent);
 							tool.find(".operate-detele").click(ToolBar.deleteWish);
-							tool.find(".operate-ongoing").click(ToolBar.goingToFinish);
+							tool.find(".operate-ongoing").click(ToolBar.goingToFinish(item.attr("w_id")));
 						}
 					}
 				}
@@ -234,11 +234,17 @@ var ToolBar = {
 	},
 	iwishToGoing : function(wish_id){
 		return function(){
+			var cb = function(){
+				//later
+			};
 			sendAjax("/update_wish_status","post",{wish_id:wish_id,status:"ongoing"},"json",cb);
 		};
 	},
 	goingToFinish : function(wish_id){
 		return function(){
+			var cb = function(){
+				//later
+			}
 			sendAjax("/update_wish_status","post",{wish_id:wish_id,status:"finish"},"json",cb);
 		};
 	},

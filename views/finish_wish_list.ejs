@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="/stylesheets/layout.css">
 	<link rel="stylesheet" href="/stylesheets/wish_list.css">
 	<script type="text/javascript" src="/javascripts/jquery-1.7.min.js"></script>
+	<script type="text/javascript" src="/javascripts/template.js"></script>
 	<script type="text/javascript" src="/javascripts/finish_wish_list.js"></script>
 </head>
 <body>
@@ -13,7 +14,7 @@
 		<header class="header project-header">
 			<a href="" class="logo project-logo"></a>
 			<a href="" class="header-orange logo-tips">for HCI</a>
-			<a href="" class="complete-wish">愿望树</a>
+			<a href="/wish_list_page/<%= project_id %>" class="complete-wish">愿望树</a>
 			<button class="suggest"></button>
 		</header>
 		<div class="body project-body" id="project-body">

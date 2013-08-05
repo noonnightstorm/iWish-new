@@ -38,7 +38,7 @@ var ScrollEvent = {
 					var box = $("#article-box");
 					for(var i = 0;i < data.length;i++){
 						var item = $(Template.project_list_item);
-						var item_title = item.find(".article-title a").text("标题:" + data[i].name).attr("href","/wish_list_page/"+getCookie("mail")+"/"+getCookie("name")+"/"+getCookie("user_id")+"/"+data[i]._id);
+						var item_title = item.find(".article-title a").text("标题:" + data[i].name).attr("href","/wish_list_page/"+data[i]._id);
 						var item_content = item.find(".article-content").text("简介:" + data[i].content);
 						item.appendTo(box);
 					}

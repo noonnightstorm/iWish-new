@@ -241,8 +241,8 @@ exports.removeWish = function(info, cb, err_cb){
 	});
 };
 exports.updateWishStatus = function(info,cb,err_cb){
-	//some problem
-	Wishs.update({_id:info._id},{$set:{status:info.status}},function(err,obj){
+	console.log(info);
+	Wishs.update({_id:info.wish_id},{$set:{status:info.status}},function(err,obj){
 		if(err){
 			err_cb(err);
 		}

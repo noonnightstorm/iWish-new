@@ -71,6 +71,72 @@ var WishListener = {
 	}
 };
 
+var CommentListener = {
+	//每次拉取的数量有限
+	num : 5,
+	listener : function(e){
+		var btn = $(e.target);
+		if(btn.attr("mark") == "false"){
+			btn.attr("mark","true");
+			var father = $(btn).parents(".wish-item");
+			var comment = $(Template.comment_list_item_dialog);
+			CommentListener.loading(comment).appendTo(father);
+			CommentListener.getData(btn);
+		}
+		else{
+			btn.attr("mark","false").attr("index","0");
+			var father = $(btn).parents(".wish-item");
+			father.children(".comment-box").remove();
+		}
+	},
+	loading : function(obj){
+		var loading = $(Template.comment_list_item_loading);
+		loading.appendTo(obj);
+		return obj;
+	},
+	getData : function(btn){
+		var wish_id = btn.attr("w_id");
+		var index = btn.attr("index");
+		sendAjax("/comment_list_data/"+ wish_id +"/"+ index +"/" + CommentListener.num,"get",null,"json",function(data){
+			//add index 
+			btn.attr("index",parseInt(index) + data.length);
+			//remove loading
+			var father = btn.parents(".wish-item");
+			var commentBox = father.children(".comment-box");
+			commentBox.children(".loading-box").remove();
+			//append input row
+			var input = $(Template.comment_list_item_input);
+			input.find(".comment-submit-btn").click(CommentListener.addComment(wish_id));
+			input.appendTo(commentBox);
+			//append data dom
+			for(var i = 0;i < data.length;i++){
+				var comment = $(Template.comment_list_item_item);
+				comment.find(".person-text").text(data[i].user_name);
+				comment.find(".ordinary-text").text(data[i].content);
+				comment.appendTo(commentBox);
+			}
+			//这里加载更多，需要修改一下
+		});
+	},
+	addComment : function(wish_id){
+		return function(e){
+			var url_items = window.location.href.split("/");
+			var project_id = url_items[url_items.length-1];
+			var content = $(e.target).siblings(".comment-input").val();
+			var cb = function(){
+				//评论数加1
+				var commentNum = $(e.target).parents(".wish-item").find(".comment-num");
+				commentNum.text(parseInt(commentNum.text()) + 1);
+				//清空对话框
+				$(e.target).siblings("input").val("");
+				//加上评论,这里需要修改!!!!!!!!
+
+			};
+			sendAjax("/create_comment","post",{project_id : project_id,wish_id : wish_id,content : content},"json",cb);
+		}
+	}
+};
+
 function sendAjax (url, type, data, datatype, cb) {
 	$.ajax({
 		url: url,
