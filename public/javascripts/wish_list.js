@@ -60,6 +60,10 @@ var WishListener = {
 			var cb = function(data){
 				if(data.result == "success"){
 					WishListener.clearScreen();
+					//加入愿望
+					var father = $(".status-iwish");
+					var item = $(Template.wish_list_item);
+					WishListener.setItemData(item,data.obj).prependTo(father);
 				}
 				else{
 					alert("发送失败");
@@ -191,9 +195,14 @@ var CommentListener = {
 				var commentNum = $(e.target).parents(".wish-item").find(".comment-num");
 				commentNum.text(parseInt(commentNum.text()) + 1);
 				//清空对话框
+				var commentText = $(e.target).siblings("input").val();
 				$(e.target).siblings("input").val("");
-				//加上评论,这里需要修改!!!!!!!!
-
+				//加上评论
+				var perNode = $(e.target).parents(".comment-box-input-row");
+				var comment = $(Template.comment_list_item_item);
+				comment.find(".person-text").text(getCookie("name"));
+				comment.find(".ordinary-text").text(commentText);
+				perNode.after(comment);
 			};
 			sendAjax("/create_comment","post",{project_id : project_id,wish_id : wish_id,content : content},"json",cb);
 		}
@@ -224,6 +233,7 @@ var ToolBar = {
 							tool.find(".operate-ongoing").click(ToolBar.goingToFinish(item.attr("w_id")));
 						}
 					}
+					$(".wish-tree-menu-form").css("display","none");
 				}
 				else{
 					$("#wish-menu-input").val("").css("background","#ffb9b9");
@@ -274,4 +284,14 @@ function sendAjax (url, type, data, datatype, cb) {
 			console.log(XMLHttpRequest + '#' + textStatus + '#' + errorThrown);
 		}
 	});
+}
+function getCookie(key){
+	var items = document.cookie.replace(/\s+/g,"").split(";");
+	for(var i = 0; i < items.length; i++){
+		var vals = items[i].split("=");
+		if(key == vals[0]){
+			return vals[1];
+		}
+	}
+	return null;
 }

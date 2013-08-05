@@ -152,7 +152,7 @@ exports.insertWish = function(info,cb,err_cb){
 			wish.comment_num = 0;
 			wish.new_mark = true;
 			wish.save();
-			cb();
+			cb(wish);
 		}
 	});
 };

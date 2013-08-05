@@ -93,8 +93,8 @@ exports.c_create_wish = function(req, res){
 		project_id : req.body.project_id,
 		content : req.body.project_content
 	},
-	cb = function(){
-		write_back(res,JSON.stringify({result:"success"}));
+	cb = function(data){
+		write_back(res,JSON.stringify({result:"success",obj:data}));
 	},
 	err_cb = function(err_info){
 		write_back(res,JSON.stringify({result:"fail",info:err_info}));
