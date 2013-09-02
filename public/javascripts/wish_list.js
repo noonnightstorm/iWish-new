@@ -163,9 +163,14 @@ var CommentListener = {
 		loading.appendTo(obj);
 		return obj;
 	},
-	showMoreBtn : function(wish_id,index,place){
+	showMoreBtn : function(wish_id,index,dataLength,place){
 		var more = $(Template.comment_list_item_more);
-		more.click(CommentListener.getMoreData(wish_id,index));
+		if(dataLength < CommentListener.num){
+			more.text("没有更多了...");
+		}
+		else{
+			more.click(CommentListener.getMoreData(wish_id,index));
+		}
 		more.appendTo(place);
 	},
 	getData : function(btn){
@@ -183,14 +188,9 @@ var CommentListener = {
 			input.find(".comment-submit-btn").click(CommentListener.addComment(wish_id));
 			input.appendTo(commentBox);
 			//append data dom
-			for(var i = 0;i < 5;i++){
-				var comment = $(Template.comment_list_item_item);
-				comment.find(".person-text").text(data[i].user_name);
-				comment.find(".ordinary-text").text(data[i].content);
-				comment.appendTo(commentBox);
-			}
+			CommentListener.appendDom(data,commentBox);
 			//append show-more button
-			CommentListener.showMoreBtn(wish_id,index,commentBox);
+			CommentListener.showMoreBtn(wish_id,index,data.length,commentBox);
 			//count++
 			CommentListener.count++;
 		});
@@ -200,21 +200,24 @@ var CommentListener = {
 			commentBox = $(e.target).parent();
 			commentBox.children('.comment-show-more').remove();
 			CommentListener.loading(commentBox);
-			sendAjax("/comment_list_data/"+ wish_id +"/"+ index +"/" + CommentListener.num,"get",null,"json",function(data){
+			sendAjax("/comment_list_data/"+ wish_id +"/"+ (CommentListener.num * CommentListener.count) +"/" + CommentListener.num,"get",null,"json",function(data){
 				//remove loading
 				commentBox.children('.loading-box').remove();
 				//append data dom
-				for(var i = 0;i < 5;i++){
-					var comment = $(Template.comment_list_item_item);
-					comment.find(".person-text").text(data[i].user_name);
-					comment.find(".ordinary-text").text(data[i].content);
-					comment.appendTo(commentBox);
-				}
+				CommentListener.appendDom(data,commentBox);
 				//append show-more button
-				CommentListener.showMoreBtn(wish_id,index,commentBox);
+				CommentListener.showMoreBtn(wish_id,index,data.length,commentBox);
 				//count++
 				CommentListener.count++;
 			});
+		}
+	},
+	appendDom : function(data,place){
+		for(var i = 0;i < data.length;i++){
+			var comment = $(Template.comment_list_item_item);
+			comment.find(".person-text").text(data[i].user_name);
+			comment.find(".ordinary-text").text(data[i].content);
+			comment.appendTo(place);
 		}
 	},
 	addComment : function(wish_id){
