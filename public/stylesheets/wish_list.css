@@ -381,11 +381,12 @@ keyframes rotation{
 	display: inline-block;
 	width: 0;
 	height: 0;
-	margin: 10px 0 0 -4px;
+	margin: 10px 0 0;
 	border-top: 12px solid transparent;
 	border-left: 24px solid #f2673c;
 	border-bottom: 12px solid transparent;
+	cursor: pointer;
 }
-.more-wish-btn:hover{
+.show-more-wish:hover{
 	opacity: 0.8;
 }

@@ -29,7 +29,7 @@ var InitPage = {
 
 var WishListener = {
 	index : 0,
-	num : 15,
+	num : 5,
 	//弹出提交单
 	listener : function(){
 		WishListener.showScreen();
@@ -72,6 +72,10 @@ var WishListener = {
 			sendAjax("/create_wish","post",{project_id:project_id,project_content:project_content},"json",cb);
 		}
 	},
+	showMoreBtn : function(){
+		var more = $(Template.wish_list_more);
+		more.appendTo('.status-iwish');
+	},
 	getOnGoingWish : function(){
 		var url_items = window.location.href.split("/");
 		var project_id = url_items[url_items.length-1];
@@ -97,10 +101,8 @@ var WishListener = {
 				WishListener.setItemData(item,data[i]).appendTo(father);
 			}
 			this.index = this.index + this.num;
-			if(this.num > data.length){
-				var tips = $(Template.wish_list_more);
-				tips.appendTo('body');
-			}
+			//显示加载更多
+			WishListener.showMoreBtn();
 		};
 		//初始化iwish的愿望
 		sendAjax("/wish_list_data/"+project_id+"/"+this.index+"/"+this.num+"/iwish","get",null,"json",cb);
