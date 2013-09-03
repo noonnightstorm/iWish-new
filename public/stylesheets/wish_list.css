@@ -138,6 +138,7 @@
 	height: 55px;
 	margin: 10px 0 10px 190px;
 	border: 1px solid #a85935;
+	padding-bottom: 3px;
 }
 .comment-box-input-row{
 	width: 400px;
@@ -298,7 +299,7 @@
 	/* display: none; */
 	float: left;
 	display: inline-block;
-	margin: 25px 0 0 100px;
+	margin: 25px 0 0;
     width: 35px;
     height: 35px;
 }
@@ -361,6 +362,11 @@ keyframes rotation{
 	margin: 18px 0 10px 30px;
 	color: #e17841;
 }
+.loading-box{
+	width: 110px;
+	height: 55px;
+	margin: 10px auto;
+}
 
 .more-wish-btn{
 	display: inline-block;
@@ -380,11 +386,12 @@ keyframes rotation{
 	display: inline-block;
 	width: 0;
 	height: 0;
-	margin: 10px 0 0 -4px;
+	margin: 10px 0 0;
 	border-top: 12px solid transparent;
 	border-left: 24px solid #f2673c;
 	border-bottom: 12px solid transparent;
+	cursor: pointer;
 }
-.more-wish-btn:hover{
+.show-more-wish:hover{
 	opacity: 0.8;
 }
