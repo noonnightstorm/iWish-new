@@ -72,9 +72,20 @@ var WishListener = {
 			sendAjax("/create_wish","post",{project_id:project_id,project_content:project_content},"json",cb);
 		}
 	},
-	showMoreBtn : function(){
-		var more = $(Template.wish_list_more);
-		more.appendTo('.status-iwish');
+	showMoreBtn : function(project_id,dataLength){
+		if(dataLength >= WishListener.num){
+			var more = $(Template.wish_list_more);
+			more.click(WishListener.getMoreIWish(project_id));
+			more.appendTo('.status-iwish');
+		}
+	},
+	appendWishDom : function(data){
+		var moreTip = $(".show-more-wish");
+		for(var i = 0;i < data.length;i++){
+			var father = $(".status-iwish");
+			var item = $(Template.wish_list_item);
+			WishListener.setItemData(item,data[i]).appendTo(father);
+		}
 	},
 	getOnGoingWish : function(){
 		var url_items = window.location.href.split("/");
@@ -93,19 +104,28 @@ var WishListener = {
 		var url_items = window.location.href.split("/");
 		var project_id = url_items[url_items.length-1];
 		var cb = function(data){
-			//根据有没加载tips进行不同的加载方式
-			var moreTip = $(".show-more-wish");
-			for(var i = 0;i < data.length;i++){
-				var father = $(".status-iwish");
-				var item = $(Template.wish_list_item);
-				WishListener.setItemData(item,data[i]).appendTo(father);
-			}
-			this.index = this.index + this.num;
+			//加载wish
+			WishListener.appendWishDom(data);
 			//显示加载更多
-			WishListener.showMoreBtn();
+			WishListener.showMoreBtn(project_id,data.length);
+			//计数加一
+			WishListener.index = WishListener.index + WishListener.num;
 		};
 		//初始化iwish的愿望
-		sendAjax("/wish_list_data/"+project_id+"/"+this.index+"/"+this.num+"/iwish","get",null,"json",cb);
+		sendAjax("/wish_list_data/"+project_id+"/"+WishListener.index+"/"+WishListener.num+"/iwish","get",null,"json",cb);
+	},
+	getMoreIWish : function(project_id){
+		return function(e){
+			$('.status-iwish').children('.show-more-wish').remove();
+			var loading = $(Template.comment_list_item_loading);
+			loading.appendTo('.status-iwish');
+			sendAjax("/wish_list_data/"+project_id+"/"+WishListener.index+"/"+WishListener.num+"/iwish","get",null,"json",function(data){
+				$(".status-iwish").children('.loading-box').remove();
+				WishListener.appendWishDom(data);
+				WishListener.showMoreBtn(project_id,data.length);
+				WishListener.index = WishListener.index + WishListener.num;
+			});
+		}
 	},
 	//给元素绑定数据
 	setItemData : function(item,data){
