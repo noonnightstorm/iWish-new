@@ -97,9 +97,10 @@ var WishListener = {
 				WishListener.setItemData(item,data[i]).appendTo(father);
 			}
 			this.index = this.index + this.num;
-			/*if(this.num > data.length){
+			if(this.num > data.length){
 				var tips = $(Template.wish_list_more);
-			}*/
+				tips.appendTo('body');
+			}
 		};
 		//初始化iwish的愿望
 		sendAjax("/wish_list_data/"+project_id+"/"+this.index+"/"+this.num+"/iwish","get",null,"json",cb);
@@ -141,8 +142,6 @@ var WishListener = {
 var CommentListener = {
 	//每次拉取的数量有限
 	num : 5,
-	//每个wish拉取评论的次数
-	count : [],
 	listener : function(e){
 		var btn = $(e.target);
 		if(btn.attr("mark") == "false"){
@@ -178,7 +177,8 @@ var CommentListener = {
 		var index = btn.attr("index");
 		sendAjax("/comment_list_data/"+ wish_id +"/"+ index +"/" + CommentListener.num,"get",null,"json",function(data){
 			//add index 
-			btn.attr("index",parseInt(index) + data.length);
+			index = parseInt(index) + data.length;
+			btn.attr("index",index);
 			//remove loading
 			var father = btn.parents(".wish-item");
 			var commentBox = father.children(".comment-box");
@@ -191,31 +191,23 @@ var CommentListener = {
 			CommentListener.appendComment(data,commentBox);
 			//append show-more button
 			CommentListener.showMoreBtn(wish_id,index,data.length,commentBox);
-			//count++
-			CommentListener.count.push([wish_id,1]);
 		});
 	},
 	getMoreData : function(wish_id,index){
 		return function(e){
-			//get position of wish_id in array 'count'
-			for(var i = 0; i < CommentListener.count.length; i++){
-				if(CommentListener.count[i][0] == wish_id){
-					var wishPos = i;
-					break;
-				}
-			}
-			commentBox = $(e.target).parent();
+			var commentBox = $(e.target).parent();
 			commentBox.children('.comment-show-more').remove();
 			CommentListener.loading(commentBox);
-			sendAjax("/comment_list_data/"+ wish_id +"/"+ (CommentListener.num * CommentListener.count[wishPos][1]) +"/" + CommentListener.num,"get",null,"json",function(data){
+			sendAjax("/comment_list_data/"+ wish_id +"/"+ index +"/" + CommentListener.num,"get",null,"json",function(data){
+				//add index
+				index = parseInt(index) + data.length;
+				commentBox.siblings('.wish-more-box').children('.comment-text').attr('index',index);
 				//remove loading
 				commentBox.children('.loading-box').remove();
 				//append data dom
 				CommentListener.appendComment(data,commentBox);
 				//append show-more button
 				CommentListener.showMoreBtn(wish_id,index,data.length,commentBox);
-				//count++
-				CommentListener.count[wishPos][1]++;
 			});
 		}
 	},
