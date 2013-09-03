@@ -138,6 +138,7 @@
 	height: 55px;
 	margin: 10px 0 10px 190px;
 	border: 1px solid #a85935;
+	padding-bottom: 3px;
 }
 .comment-box-input-row{
 	width: 400px;

@@ -141,8 +141,8 @@ var WishListener = {
 var CommentListener = {
 	//每次拉取的数量有限
 	num : 5,
-	//拉取的次数
-	count : 0,
+	//每个wish拉取评论的次数
+	count : [],
 	listener : function(e){
 		var btn = $(e.target);
 		if(btn.attr("mark") == "false"){
@@ -188,31 +188,38 @@ var CommentListener = {
 			input.find(".comment-submit-btn").click(CommentListener.addComment(wish_id));
 			input.appendTo(commentBox);
 			//append data dom
-			CommentListener.appendDom(data,commentBox);
+			CommentListener.appendComment(data,commentBox);
 			//append show-more button
 			CommentListener.showMoreBtn(wish_id,index,data.length,commentBox);
 			//count++
-			CommentListener.count++;
+			CommentListener.count.push([wish_id,1]);
 		});
 	},
 	getMoreData : function(wish_id,index){
 		return function(e){
+			//get position of wish_id in array 'count'
+			for(var i = 0; i < CommentListener.count.length; i++){
+				if(CommentListener.count[i][0] == wish_id){
+					var wishPos = i;
+					break;
+				}
+			}
 			commentBox = $(e.target).parent();
 			commentBox.children('.comment-show-more').remove();
 			CommentListener.loading(commentBox);
-			sendAjax("/comment_list_data/"+ wish_id +"/"+ (CommentListener.num * CommentListener.count) +"/" + CommentListener.num,"get",null,"json",function(data){
+			sendAjax("/comment_list_data/"+ wish_id +"/"+ (CommentListener.num * CommentListener.count[wishPos][1]) +"/" + CommentListener.num,"get",null,"json",function(data){
 				//remove loading
 				commentBox.children('.loading-box').remove();
 				//append data dom
-				CommentListener.appendDom(data,commentBox);
+				CommentListener.appendComment(data,commentBox);
 				//append show-more button
 				CommentListener.showMoreBtn(wish_id,index,data.length,commentBox);
 				//count++
-				CommentListener.count++;
+				CommentListener.count[wishPos][1]++;
 			});
 		}
 	},
-	appendDom : function(data,place){
+	appendComment : function(data,place){
 		for(var i = 0;i < data.length;i++){
 			var comment = $(Template.comment_list_item_item);
 			comment.find(".person-text").text(data[i].user_name);
